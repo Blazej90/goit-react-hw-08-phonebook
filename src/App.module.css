@@ -1,0 +1,35 @@
+.appContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageTitle {
+  margin: 0;
+  padding-top: 30px;
+  padding-bottom: 80px;
+}
+
+.name {
+  margin: 0;
+  font-weight: 500;
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.addContactBtn {
+  margin-top: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.contactItem {
+  margin-bottom: 10px;
+}
+
+.deleteBtn {
+  margin-left: 5px;
+  border-radius: 5px;
+}
