@@ -1,10 +1,20 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUserStart } from '../redux/auth/operations';
+import { selectUser } from '../redux/auth/selectors';
 
-const UserMenu = ({ userEmail, onLogout }) => {
+const UserMenu = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
+  const handleLogout = () => {
+    dispatch(logoutUserStart());
+  };
+
   return (
     <div>
-      <p>{userEmail}</p>
-      <button onClick={onLogout}>Logout</button>
+      <p>{user.email}</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
