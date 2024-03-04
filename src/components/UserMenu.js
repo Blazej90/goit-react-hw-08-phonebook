@@ -13,8 +13,14 @@ const UserMenu = () => {
 
   return (
     <div>
-      <p>{user.email}</p>
-      <button onClick={handleLogout}>Logout</button>
+      {user ? (
+        <>
+          <p>{user.email}</p>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <p>Loading user...</p>
+      )}
     </div>
   );
 };

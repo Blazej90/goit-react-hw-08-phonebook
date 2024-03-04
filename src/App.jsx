@@ -4,16 +4,10 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import PrivateRoute from './components/PrivateRoute';
 import RestrictedRoute from './components/RestrictedRoute';
-import {
-  refreshUserStart,
-  refreshUserSuccess,
-  loginUserStart,
-  loginUserSuccess,
-  logoutUserStart,
-  logoutUserSuccess,
-} from './redux/auth/operations';
+import { refreshToken } from './redux/auth/authSlice';
 import { useAuth } from './hooks';
 import UserMenu from './components/UserMenu';
+import { loginUser, registerUser } from './redux/auth/authSlice'; // Dodaj importy akcji logowania i rejestracji
 
 // Lazily import components
 const HomePage = lazy(() => import('./pages/Home'));
@@ -26,40 +20,17 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshUserStart());
-
-    setTimeout(() => {
-      dispatch(refreshUserSuccess({ id: 1, name: 'John Doe' }));
-    }, 2000);
-
-    // setTimeout(() => {
-    //   dispatch(refreshUserFailure('Error occurred while refreshing user'));
-    // }, 2000);
+    dispatch(refreshToken());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(loginUserStart());
+  // Funkcje logowania i rejestracji użytkownika
+  const handleLogin = credentials => {
+    dispatch(loginUser(credentials));
+  };
 
-    setTimeout(() => {
-      dispatch(loginUserSuccess({ id: 1, name: 'John Doe' }));
-    }, 2000);
-
-    // setTimeout(() => {
-    //   dispatch(loginUserFailure('Error occurred while logging in'));
-    // }, 2000);
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(logoutUserStart());
-
-    setTimeout(() => {
-      dispatch(logoutUserSuccess());
-    }, 2000);
-
-    // setTimeout(() => {
-    //   dispatch(logoutUserFailure('Error occurred while logging out'));
-    // }, 2000);
-  }, [dispatch]);
+  const handleRegister = userData => {
+    dispatch(registerUser(userData));
+  };
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
@@ -70,13 +41,21 @@ const App = () => {
         <Route
           path="/register"
           element={
-            <RestrictedRoute redirectTo="/tasks" component={RegisterPage} />
+            <RestrictedRoute
+              redirectTo="/tasks"
+              component={RegisterPage}
+              handleRegister={handleRegister}
+            />
           }
         />
         <Route
           path="/login"
           element={
-            <RestrictedRoute redirectTo="/tasks" component={LoginPage} />
+            <RestrictedRoute
+              redirectTo="/tasks"
+              component={LoginPage}
+              handleLogin={handleLogin}
+            />
           }
         />
         <Route
