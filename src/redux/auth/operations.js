@@ -5,7 +5,6 @@ import {
   loginUserFailure,
 } from './authActions';
 
-// Akcje dla odświeżania użytkownika
 export const refreshUserStart = () => ({
   type: 'auth/refreshUserStart',
 });
@@ -20,14 +19,11 @@ export const refreshUserFailure = error => ({
   payload: error,
 });
 
-// Akcja logowania użytkownika z wykorzystaniem axios
 export const loginUser = credentials => {
   return async dispatch => {
-    // Rozpoczęcie procesu logowania
     dispatch(loginUserStart());
 
     try {
-      // Wysłanie żądania logowania za pomocą Axios
       const response = await axios.post(
         'https://connections-api.herokuapp.com/login',
         credentials
@@ -45,7 +41,6 @@ export const loginUser = credentials => {
   };
 };
 
-// Akcje dla wylogowywania użytkownika
 export const logoutUserStart = () => ({
   type: 'auth/logoutUserStart',
 });

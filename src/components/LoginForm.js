@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { loginSuccess, loginFailure } from '../redux/userSlice';
+import { loginUser } from '../redux/auth/authSlice';
+import { Redirect } from 'react-router-dom';
+import { useAuth } from './hooks';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const { isLoggedIn } = useAuth();
 
   const handleEmailChange = event => {
     setEmail(event.target.value);
@@ -20,28 +23,8 @@ const LoginForm = () => {
     event.preventDefault();
 
     try {
-      const loginData = {
-        email,
-        password,
-      };
-
-      const response = await fetch('https://connections-api.herokuapp.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-
-        dispatch(loginSuccess(userData));
-      } else {
-        const errorMessage = await response.text();
-
-        dispatch(loginFailure(errorMessage));
-      }
+      // Dispatch akcji logowania
+      dispatch(loginUser({ email, password }));
     } catch (error) {
       console.error('Błąd podczas logowania:', error);
     }
@@ -49,6 +32,11 @@ const LoginForm = () => {
     setEmail('');
     setPassword('');
   };
+
+  // Jeśli użytkownik jest zalogowany, przekieruj go do innej ścieżki (na przykład do strony głównej(ma być do strony z kontaktami)
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div>

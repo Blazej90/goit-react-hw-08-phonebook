@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Funkcja asynchroniczna do logowania użytkownika
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (userData, { dispatch }) => {
@@ -24,7 +23,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// Funkcja asynchroniczna do rejestracji użytkownika
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { dispatch }) => {
@@ -45,7 +43,6 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// Funkcja asynchroniczna do wylogowywania użytkownika
 export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
   async (_, { dispatch }) => {
@@ -55,7 +52,7 @@ export const logoutUser = createAsyncThunk(
         {},
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Dodanie tokena do nagłówka
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
@@ -70,7 +67,6 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-// Funkcja asynchroniczna do odświeżania tokenu JWT
 export const refreshToken = createAsyncThunk(
   'auth/refreshToken',
   async (_, { dispatch, getState }) => {
@@ -86,7 +82,6 @@ export const refreshToken = createAsyncThunk(
         }
       );
 
-      // Pomyślne odświeżenie tokenu
       if (response.status === 200) {
         const user = response.data.user;
         dispatch(loginUserSuccess(user));

@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logoutUserStart } from '../redux/auth/operations';
-import { selectUser } from '../redux/auth/selectors';
+import { useAuth } from '../hooks';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const { user, isLoading } = useAuth();
 
   const handleLogout = () => {
     dispatch(logoutUserStart());
@@ -13,13 +13,15 @@ const UserMenu = () => {
 
   return (
     <div>
-      {user ? (
+      {isLoading ? (
+        <p>Loading user...</p>
+      ) : user ? (
         <>
           <p>{user.email}</p>
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
-        <p>Loading user...</p>
+        <p>User not logged in</p>
       )}
     </div>
   );
