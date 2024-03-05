@@ -11,8 +11,8 @@ import { loginUser, registerUser } from './redux/auth/authSlice'; // Dodaj impor
 
 // Lazily import components
 const HomePage = lazy(() => import('./pages/Home'));
-const RegisterPage = lazy(() => import('./pages/Register'));
-const LoginPage = lazy(() => import('./pages/Login'));
+const RegisterForm = lazy(() => import('./pages/Register'));
+const LoginForm = lazy(() => import('./pages/Login'));
 const TasksPage = lazy(() => import('./pages/Tasks'));
 
 const App = () => {
@@ -42,9 +42,9 @@ const App = () => {
           path="/register"
           element={
             <RestrictedRoute
-              redirectTo="/tasks"
-              component={RegisterPage}
               handleRegister={handleRegister}
+              redirectTo="/contacts"
+              component={<RegisterForm />}
             />
           }
         />
@@ -53,7 +53,7 @@ const App = () => {
           element={
             <RestrictedRoute
               redirectTo="/tasks"
-              component={LoginPage}
+              component={LoginForm}
               handleLogin={handleLogin}
             />
           }
