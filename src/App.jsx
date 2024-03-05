@@ -7,7 +7,7 @@ import RestrictedRoute from './components/RestrictedRoute';
 import { refreshToken } from './redux/auth/authSlice';
 import { useAuth } from './hooks';
 import UserMenu from './components/UserMenu';
-import { loginUser, registerUser } from './redux/auth/authSlice'; // Dodaj importy akcji logowania i rejestracji
+import { loginUser, registerUser } from './redux/auth/authSlice';
 
 // Lazily import components
 const HomePage = lazy(() => import('./pages/Home'));

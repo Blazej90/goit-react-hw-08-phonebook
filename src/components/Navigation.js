@@ -1,19 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from './hooks';
 
 const Navigation = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
     <nav>
       <ul>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/contacts">Contacts</Link>
-        </li>
+        {!isLoggedIn && (
+          <li>
+            <NavLink to="/register" activeClassName="active">
+              Register
+            </NavLink>
+          </li>
+        )}
+
+        {!isLoggedIn && (
+          <li>
+            <NavLink to="/login" activeClassName="active">
+              Login
+            </NavLink>
+          </li>
+        )}
+
+        {isLoggedIn && (
+          <li>
+            <NavLink to="/contacts" activeClassName="active">
+              Contacts
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );
