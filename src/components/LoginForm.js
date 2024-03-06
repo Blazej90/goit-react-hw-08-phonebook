@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { loginUser } from '../redux/auth/authSlice';
-import { Redirect } from 'react-router-dom';
-import { useAuth } from './hooks';
+import { useAuth } from 'hooks';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -33,9 +32,13 @@ const LoginForm = () => {
     setPassword('');
   };
 
-  // Jeśli użytkownik jest zalogowany, przekieruj go do innej ścieżki (na przykład do strony głównej(ma być do strony z kontaktami)
+  // Jeśli użytkownik jest już zalogowany, wyświetl komunikat o zalogowaniu
   if (isLoggedIn) {
-    return <Redirect to="/" />;
+    return (
+      <div>
+        <p>You are already logged in!</p>
+      </div>
+    );
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logoutUserStart } from '../redux/auth/operations';
+import { logoutUser } from '../redux/auth/authSlice';
 import { useAuth } from '../hooks';
 
 const UserMenu = () => {
@@ -8,7 +8,7 @@ const UserMenu = () => {
   const { user, isLoading } = useAuth();
 
   const handleLogout = () => {
-    dispatch(logoutUserStart());
+    dispatch(logoutUser());
   };
 
   return (
