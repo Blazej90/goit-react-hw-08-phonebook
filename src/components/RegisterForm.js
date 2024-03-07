@@ -7,6 +7,7 @@ const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const dispatch = useDispatch();
 
   const handleNameChange = event => {
@@ -26,6 +27,7 @@ const RegisterForm = () => {
     try {
       await dispatch(registerStart({ name, email, password }));
       console.log('Rejestracja udana!');
+      setRegistrationSuccess(true);
     } catch (error) {
       console.error('Błąd rejestracji:', error.message);
     }
@@ -42,27 +44,36 @@ const RegisterForm = () => {
       <div>
         <h2>Create your account</h2>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={handleNameChange}
-          placeholder="Name"
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder="Password"
-        />
-        <button type="submit">Register</button>
-      </form>
+      {registrationSuccess ? (
+        <div>
+          <p>
+            Great! You have just created your account. Log in with the correct
+            information.
+          </p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+            placeholder="Name"
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Password"
+          />
+          <button type="submit">Register</button>
+        </form>
+      )}
     </div>
   );
 };

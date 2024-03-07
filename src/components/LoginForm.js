@@ -22,8 +22,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     try {
-      // Dispatch akcji logowania
-      dispatch(loginUser({ email, password }));
+      await dispatch(loginUser({ email, password }));
     } catch (error) {
       console.error('Błąd podczas logowania:', error);
     }
