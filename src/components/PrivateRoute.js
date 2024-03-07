@@ -1,11 +1,11 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks';
 
-const PrivateRoute = ({ redirectTo, ...props }) => {
+const PrivateRoute = ({ redirectTo, component: Component }) => {
   const { isLoggedIn } = useAuth();
 
-  return isLoggedIn ? <Route {...props} /> : <Navigate to={redirectTo} />;
+  return isLoggedIn ? Component : <Navigate to={redirectTo} />;
 };
 
 export default PrivateRoute;
