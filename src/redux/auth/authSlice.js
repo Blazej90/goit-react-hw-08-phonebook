@@ -11,40 +11,13 @@ const setAuthToken = token => {
 };
 
 // Logowanie użytkownika
-// export const loginUser = createAsyncThunk(
-//   'auth/loginUser',
-//   async (userData, { dispatch }) => {
-//     try {
-//       const response = await axios.post(
-//         'https://connections-api.herokuapp.com/users/login',
-//         userData
-//       );
-//       const token = response.data.token;
-//       localStorage.setItem('token', token);
-//       setAuthToken(token);
-//       if (response.status === 200) {
-//         const user = response.data.user;
-//         dispatch(loginUserSuccess(user));
-//       } else {
-//         dispatch(loginUserFailure('Login failed'));
-//       }
-//     } catch (error) {
-//       dispatch(loginUserFailure(error.message));
-//     }
-//   }
-// );
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (userData, { dispatch }) => {
     try {
       const response = await axios.post(
         'https://connections-api.herokuapp.com/users/login',
-        userData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        userData
       );
       const token = response.data.token;
       localStorage.setItem('token', token);
@@ -60,6 +33,33 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+// export const loginUser = createAsyncThunk(
+//   'auth/loginUser',
+//   async (userData, { dispatch }) => {
+//     try {
+//       const response = await axios.post(
+//         'https://connections-api.herokuapp.com/users/login',
+//         userData,
+//         {
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//         }
+//       );
+//       const token = response.data.token;
+//       localStorage.setItem('token', token);
+//       setAuthToken(token);
+//       if (response.status === 200) {
+//         const user = response.data.user;
+//         dispatch(loginUserSuccess(user));
+//       } else {
+//         dispatch(loginUserFailure('Login failed'));
+//       }
+//     } catch (error) {
+//       dispatch(loginUserFailure(error.message));
+//     }
+//   }
+// );
 
 // Rejestracja użytkownika
 export const registerUser = createAsyncThunk(
