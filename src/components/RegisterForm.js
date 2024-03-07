@@ -39,6 +39,9 @@ const RegisterForm = () => {
       <Helmet>
         <title>Register</title>
       </Helmet>
+      <div>
+        <h2>Create your account</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

@@ -30,7 +30,6 @@ const Layout = () => {
             )}
           </ul>
         </nav>
-        <div>Home Page...</div>
       </header>
       <main>
         <Outlet />

@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>Welcome to the application Phonebook</h1>
       <p>This is Home page</p>
       {isLoggedIn && <p>Welcome back, {user.name}!</p>}
     </div>

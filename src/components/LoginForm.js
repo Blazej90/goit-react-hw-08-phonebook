@@ -46,6 +46,9 @@ const LoginForm = () => {
       <Helmet>
         <title>Login</title>
       </Helmet>
+      <div>
+        <h2>Log in</h2>
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
