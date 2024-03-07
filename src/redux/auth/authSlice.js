@@ -1,6 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Funkcja do ustawienia nagłówka żądania z tokenem JWT
+const setAuthToken = token => {
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+};
+
+// Logowanie użytkownika
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (userData, { dispatch }) => {
@@ -11,6 +21,7 @@ export const loginUser = createAsyncThunk(
       );
       const token = response.data.token;
       localStorage.setItem('token', token);
+      setAuthToken(token);
       if (response.status === 200) {
         const user = response.data.user;
         dispatch(loginUserSuccess(user));
@@ -23,6 +34,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// Rejestracja użytkownika
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { dispatch }) => {
@@ -33,6 +45,9 @@ export const registerUser = createAsyncThunk(
       );
       if (response.status === 201) {
         const user = response.data.user;
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        setAuthToken(token);
         dispatch(loginUserSuccess(user));
       } else {
         dispatch(loginUserFailure('Registration failed'));
@@ -43,20 +58,17 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+// Wylogowanie użytkownika
 export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
   async (_, { dispatch }) => {
     try {
       const response = await axios.post(
-        'https://connections-api.herokuapp.com/users/logout',
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
+        'https://connections-api.herokuapp.com/users/logout'
       );
       if (response.status === 200) {
+        localStorage.removeItem('token');
+        setAuthToken(null);
         dispatch(logoutUserSuccess());
       } else {
         dispatch(logoutUserFailure('Logout failed'));
@@ -67,21 +79,18 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+// Pobranie aktualnego użytkownika (odświeżenie tokenu)
 export const refreshToken = createAsyncThunk(
   'auth/refreshToken',
-  async (_, { dispatch, getState }) => {
+  async (_, { dispatch, getState, rejectWithValue }) => {
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('No token available');
+    }
     try {
-      const token = getState().auth.token;
-
       const response = await axios.get(
-        'https://connections-api.herokuapp.com/users/current',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        'https://connections-api.herokuapp.com/users/current'
       );
-
       if (response.status === 200) {
         const user = response.data.user;
         dispatch(loginUserSuccess(user));
@@ -94,13 +103,16 @@ export const refreshToken = createAsyncThunk(
   }
 );
 
+// Początkowy stan autoryzacji
 const initialState = {
   user: null,
   isLoggedIn: false,
   loading: false,
   error: null,
+  token: localStorage.getItem('token'),
 };
 
+// Slice autoryzacji
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -168,6 +180,7 @@ const authSlice = createSlice({
   },
 });
 
+// Eksport akcji i reduktora autoryzacji
 export const {
   loginUserStart,
   loginUserSuccess,
