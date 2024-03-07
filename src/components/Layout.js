@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import { useAuth } from '../hooks';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { isLoggedIn } = useAuth();
 
   return (
@@ -32,7 +32,9 @@ const Layout = ({ children }) => {
         </nav>
         <div>Home Page...</div>
       </header>
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };

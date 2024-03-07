@@ -29,16 +29,16 @@ const App = () => {
         <Route
           path="phonebook"
           element={
-            <RestrictedRoute redirectTo="/login" component={<Phonebook />} />
+            <PrivateRoute redirectTo="/login" component={<Phonebook />} />
           }
         />
         <Route
           path="/register"
-          element={<PrivateRoute element={<Register />} redirectTo="/" />}
+          element={<RestrictedRoute component={<Register />} redirectTo="/" />}
         />
         <Route
           path="/login"
-          element={<PrivateRoute component={<Login />} redirectTo="/" />}
+          element={<RestrictedRoute component={<Login />} redirectTo="/" />}
         />
       </Route>
     </Routes>
