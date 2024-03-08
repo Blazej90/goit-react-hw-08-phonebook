@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { registerStart } from '../redux/userSlice';
+import { registerStart } from '../../redux/userSlice';
+
+import styles from './RegisterForm.module.css';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -37,7 +39,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div>
+    <div className={styles.containerRegister}>
       <Helmet>
         <title>Register</title>
       </Helmet>
@@ -52,7 +54,10 @@ const RegisterForm = () => {
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className={styles.containerRegisterInputs}
+        >
           <input
             type="text"
             value={name}

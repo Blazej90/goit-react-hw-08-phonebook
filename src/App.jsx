@@ -7,7 +7,7 @@ import RestrictedRoute from './components/RestrictedRoute';
 import { refreshToken } from './redux/auth/authSlice';
 import { useAuth } from './hooks';
 import { fetchContacts } from './redux/contactsSlice';
-import Home from './pages/Home';
+import Home from './pages/HomePage/Home';
 import Register from './pages/Register';
 // import RegisterForm from 'components/RegisterForm';
 import Login from './pages/Login';

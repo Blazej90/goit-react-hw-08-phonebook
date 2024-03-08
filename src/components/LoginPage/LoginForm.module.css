@@ -1,0 +1,11 @@
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerLoginInputs {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { loginUser } from '../redux/auth/authSlice';
+import { loginUser } from '../../redux/auth/authSlice';
 import { useAuth } from 'hooks';
+
+import styles from './LoginForm.module.css';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -41,14 +43,14 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <div className={styles.containerLogin}>
       <Helmet>
         <title>Login</title>
       </Helmet>
       <div>
         <h2>Log in</h2>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.containerLoginInputs}>
         <input
           type="email"
           name="email"
