@@ -84,11 +84,12 @@
 // };
 
 // export default RegisterForm;
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { registerUser } from '../../redux/auth/authSlice';
-import { useNavigate } from 'react-router-dom'; // Importuj useNavigate
+import { useNavigate } from 'react-router-dom';
 
 import styles from './RegisterForm.module.css';
 
@@ -98,7 +99,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Użyj useNavigate do przekierowania
+  const navigate = useNavigate();
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -126,7 +127,6 @@ const RegisterForm = () => {
     setPassword('');
   };
 
-  // Funkcja do przekierowania do strony logowania po zarejestrowaniu użytkownika
   const redirectToLogin = () => {
     navigate('/login');
   };
