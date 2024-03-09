@@ -22,16 +22,32 @@ const App = () => {
     if (isLoggedIn) dispatch(fetchContacts());
   }, [dispatch, isLoggedIn]);
 
+  // return (
+  //   <Routes>
+  //     <Route path="/" element={<Layout />}>
+  //       <Route index element={<Home />} />
+  //       <Route
+  //         path="phonebook"
+  //         element={
+  //           <PrivateRoute redirectTo="/login" component={<Phonebook />} />
+  //         }
+  //       />
+  //       <Route
+  //         path="/register"
+  //         element={<RestrictedRoute component={<Register />} redirectTo="/" />}
+  //       />
+  //       <Route
+  //         path="/login"
+  //         element={<RestrictedRoute component={<Login />} redirectTo="/" />}
+  //       />
+  //     </Route>
+  //   </Routes>
+  // );
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route
-          path="phonebook"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Phonebook />} />
-          }
-        />
         <Route
           path="/register"
           element={<RestrictedRoute component={<Register />} redirectTo="/" />}
@@ -39,6 +55,12 @@ const App = () => {
         <Route
           path="/login"
           element={<RestrictedRoute component={<Login />} redirectTo="/" />}
+        />
+        <Route
+          path="phonebook"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Phonebook />} />
+          }
         />
       </Route>
     </Routes>

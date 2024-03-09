@@ -5,6 +5,7 @@ import { fetchContacts } from '../redux/contactsSlice';
 import { selectLoading, selectError } from '../redux/auth/selectors';
 import ContactForm from '../components/ContactForm';
 import ContactList from '../components/ContactList';
+import Filter from '../components/Filter';
 
 const Phonebook = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Phonebook = () => {
       </HelmetProvider>
       <div>
         <ContactForm />
+        <Filter />
         <ContactList isLoading={isLoading} isError={isError} />
       </div>
     </div>

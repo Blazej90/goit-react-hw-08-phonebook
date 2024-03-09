@@ -35,6 +35,28 @@ export const loginUser = createAsyncThunk(
 );
 
 // Rejestracja użytkownika
+// export const registerUser = createAsyncThunk(
+//   'auth/registerUser',
+//   async (userData, { dispatch }) => {
+//     try {
+//       const response = await axios.post(
+//         'https://connections-api.herokuapp.com/users/signup',
+//         userData
+//       );
+//       if (response.status === 201) {
+//         const user = response.data.user;
+//         const token = response.data.token;
+//         localStorage.setItem('token', token);
+//         setAuthToken(token);
+//         dispatch(loginUserSuccess(user));
+//       } else {
+//         dispatch(loginUserFailure('Registration failed'));
+//       }
+//     } catch (error) {
+//       dispatch(loginUserFailure(error.message));
+//     }
+//   }
+// );
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { dispatch }) => {
@@ -44,16 +66,14 @@ export const registerUser = createAsyncThunk(
         userData
       );
       if (response.status === 201) {
+        // Zwróć tylko dane użytkownika po udanej rejestracji
         const user = response.data.user;
-        const token = response.data.token;
-        localStorage.setItem('token', token);
-        setAuthToken(token);
-        dispatch(loginUserSuccess(user));
+        return user;
       } else {
-        dispatch(loginUserFailure('Registration failed'));
+        throw new Error('Registration failed');
       }
     } catch (error) {
-      dispatch(loginUserFailure(error.message));
+      throw new Error(error.message);
     }
   }
 );
