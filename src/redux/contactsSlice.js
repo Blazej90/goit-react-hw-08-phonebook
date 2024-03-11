@@ -66,42 +66,63 @@ import axios from 'axios';
 
 const apiUrl = 'https://connections-api.herokuapp.com/contacts';
 
+// Funkcja do ustawienia nagłówka żądania z tokenem JWT
+const setAuthHeader = token => {
+  if (token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
+
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const { auth } = getState();
-    const response = await axios.get(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    });
-    return response.data;
+    if (!auth.token) {
+      return rejectWithValue('No token available');
+    }
+    setAuthHeader(auth.token);
+    try {
+      const response = await axios.get(apiUrl);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const addNewContact = createAsyncThunk(
   'contacts/addNewContact',
-  async (contact, { getState }) => {
+  async (contact, { getState, rejectWithValue }) => {
     const { auth } = getState();
-    const response = await axios.post(apiUrl, contact, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    });
-    return response.data;
+    if (!auth.token) {
+      return rejectWithValue('No token available');
+    }
+    setAuthHeader(auth.token);
+    try {
+      const response = await axios.post(apiUrl, contact);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (contactId, { getState }) => {
+  async (contactId, { getState, rejectWithValue }) => {
     const { auth } = getState();
-    await axios.delete(`${apiUrl}/${contactId}`, {
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    });
-    return contactId;
+    if (!auth.token) {
+      return rejectWithValue('No token available');
+    }
+    setAuthHeader(auth.token);
+    try {
+      await axios.delete(`${apiUrl}/${contactId}`);
+      return contactId;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
