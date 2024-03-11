@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { addNewContact } from '../redux/contactsSlice';
-import styles from '../App.module.css';
+import { addNewContact } from '../../redux/contactsSlice';
+import styles from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -31,6 +31,7 @@ const ContactForm = () => {
 
   return (
     <div className={styles.appContainer}>
+      <h1>Phonebook</h1>
       <p className={styles.name}>Name</p>
       <label>
         <input
