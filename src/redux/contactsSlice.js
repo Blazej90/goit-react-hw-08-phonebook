@@ -3,26 +3,44 @@ import axios from 'axios';
 
 const apiUrl = 'https://65d5f0ccf6967ba8e3bd06c0.mockapi.io/contacts/contacts';
 
+// Tworzenie createAsyncThunk dla fetchContacts
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
-  async () => {
-    const response = await axios.get(apiUrl);
+  async (_, { getState }) => {
+    const { auth } = getState();
+    const response = await axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
     return response.data;
   }
 );
 
+// Tworzenie createAsyncThunk dla addNewContact
 export const addNewContact = createAsyncThunk(
   'contacts/addNewContact',
-  async contact => {
-    const response = await axios.post(apiUrl, contact);
+  async (contact, { getState }) => {
+    const { auth } = getState();
+    const response = await axios.post(apiUrl, contact, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
     return response.data;
   }
 );
 
+// Tworzenie createAsyncThunk dla deleteContact
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async id => {
-    await axios.delete(`${apiUrl}/${id}`);
+  async (id, { getState }) => {
+    const { auth } = getState();
+    await axios.delete(`${apiUrl}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
     return id;
   }
 );

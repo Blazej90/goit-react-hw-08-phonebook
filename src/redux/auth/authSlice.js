@@ -13,7 +13,7 @@ const setAuthToken = token => {
 // Logowanie użytkownika
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (userData, { dispatch }) => {
+  async (userData, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.post(
         'https://connections-api.herokuapp.com/users/login',
@@ -29,51 +29,45 @@ export const loginUser = createAsyncThunk(
         dispatch(loginUserFailure('Login failed'));
       }
     } catch (error) {
-      dispatch(loginUserFailure(error.message));
+      if (!error.response) {
+        return rejectWithValue('No response from server');
+      }
+      const status = error.response.status;
+      if (status === 401 || status === 403) {
+        return rejectWithValue('Unauthorized access');
+      }
+      return rejectWithValue(error.message);
     }
   }
 );
 
 // Rejestracja użytkownika
-// export const registerUser = createAsyncThunk(
-//   'auth/registerUser',
-//   async (userData, { dispatch }) => {
-//     try {
-//       const response = await axios.post(
-//         'https://connections-api.herokuapp.com/users/signup',
-//         userData
-//       );
-//       if (response.status === 201) {
-//         const user = response.data.user;
-//         const token = response.data.token;
-//         localStorage.setItem('token', token);
-//         setAuthToken(token);
-//         dispatch(loginUserSuccess(user));
-//       } else {
-//         dispatch(loginUserFailure('Registration failed'));
-//       }
-//     } catch (error) {
-//       dispatch(loginUserFailure(error.message));
-//     }
-//   }
-// );
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async (userData, { dispatch }) => {
+  async (userData, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.post(
         'https://connections-api.herokuapp.com/users/signup',
         userData
       );
       if (response.status === 201) {
-        // Zwróć tylko dane użytkownika po udanej rejestracji
         const user = response.data.user;
-        return user;
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        setAuthToken(token);
+        dispatch(loginUserSuccess(user));
       } else {
-        throw new Error('Registration failed');
+        dispatch(loginUserFailure('Registration failed'));
       }
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.response) {
+        return rejectWithValue('No response from server');
+      }
+      const status = error.response.status;
+      if (status === 401 || status === 403) {
+        return rejectWithValue('Unauthorized access');
+      }
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -81,7 +75,7 @@ export const registerUser = createAsyncThunk(
 // Wylogowanie użytkownika
 export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
-  async (_, { dispatch }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.post(
         'https://connections-api.herokuapp.com/users/logout'
@@ -94,7 +88,14 @@ export const logoutUser = createAsyncThunk(
         dispatch(logoutUserFailure('Logout failed'));
       }
     } catch (error) {
-      dispatch(logoutUserFailure(error.message));
+      if (!error.response) {
+        return rejectWithValue('No response from server');
+      }
+      const status = error.response.status;
+      if (status === 401 || status === 403) {
+        return rejectWithValue('Unauthorized access');
+      }
+      return rejectWithValue(error.message);
     }
   }
 );

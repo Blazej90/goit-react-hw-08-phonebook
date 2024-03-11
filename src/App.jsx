@@ -9,7 +9,6 @@ import { useAuth } from './hooks';
 import { fetchContacts } from './redux/contactsSlice';
 import Home from './pages/HomePage/Home';
 import Register from './pages/Register';
-// import RegisterForm from 'components/RegisterForm';
 import Login from './pages/Login';
 import Phonebook from './pages/Phonebook';
 
@@ -21,28 +20,6 @@ const App = () => {
     dispatch(refreshToken());
     if (isLoggedIn) dispatch(fetchContacts());
   }, [dispatch, isLoggedIn]);
-
-  // return (
-  //   <Routes>
-  //     <Route path="/" element={<Layout />}>
-  //       <Route index element={<Home />} />
-  //       <Route
-  //         path="phonebook"
-  //         element={
-  //           <PrivateRoute redirectTo="/login" component={<Phonebook />} />
-  //         }
-  //       />
-  //       <Route
-  //         path="/register"
-  //         element={<RestrictedRoute component={<Register />} redirectTo="/" />}
-  //       />
-  //       <Route
-  //         path="/login"
-  //         element={<RestrictedRoute component={<Login />} redirectTo="/" />}
-  //       />
-  //     </Route>
-  //   </Routes>
-  // );
 
   return (
     <Routes>
@@ -57,7 +34,7 @@ const App = () => {
           element={<RestrictedRoute component={<Login />} redirectTo="/" />}
         />
         <Route
-          path="phonebook"
+          path="/phonebook"
           element={
             <PrivateRoute redirectTo="/login" component={<Phonebook />} />
           }

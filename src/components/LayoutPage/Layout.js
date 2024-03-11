@@ -1,12 +1,19 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import UserMenu from '../UserMenu';
+import React, { useEffect } from 'react';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks';
+import UserMenu from '../UserMenu';
 
 import styles from './Layout.module.css';
 
 const Layout = () => {
   const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/phonebook');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div>
