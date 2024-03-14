@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { fetchContacts } from '../redux/contactsSlice';
+import {
+  fetchContacts,
+  addNewContact,
+  deleteContact,
+} from '../redux/contactsSlice';
 import { selectLoading, selectError } from '../redux/auth/selectors';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList';
@@ -16,6 +20,14 @@ const Phonebook = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  const handleAddNewContact = contact => {
+    dispatch(addNewContact(contact));
+  };
+
+  const handleDeleteContact = contactId => {
+    dispatch(deleteContact(contactId));
+  };
+
   return (
     <div>
       <HelmetProvider>
@@ -24,9 +36,13 @@ const Phonebook = () => {
         </Helmet>
       </HelmetProvider>
       <div>
-        <ContactForm />
+        <ContactForm onAddNewContact={handleAddNewContact} />
         <Filter />
-        <ContactList isLoading={isLoading} isError={isError} />
+        <ContactList
+          isLoading={isLoading}
+          isError={isError}
+          onDeleteContact={handleDeleteContact}
+        />
       </div>
     </div>
   );

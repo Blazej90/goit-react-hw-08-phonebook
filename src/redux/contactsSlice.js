@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const apiUrl = 'https://connections-api.herokuapp.com/contacts';
+const apiUrlContacts = 'https://connections-api.herokuapp.com';
 
 const setAuthHeader = token => {
   if (token) {
@@ -15,12 +15,9 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   async (_, { getState, rejectWithValue }) => {
     const { auth } = getState();
-    if (!auth.token) {
-      throw new Error('No token available');
-    }
     setAuthHeader(auth.token);
     try {
-      const response = await axios.get(apiUrl);
+      const response = await axios.get(`${apiUrlContacts}/contacts`);
       return response.data;
     } catch (error) {
       throw error;
@@ -32,12 +29,9 @@ export const addNewContact = createAsyncThunk(
   'contacts/addNewContact',
   async (contact, { getState, rejectWithValue }) => {
     const { auth } = getState();
-    if (!auth.token) {
-      throw new Error('No token available');
-    }
     setAuthHeader(auth.token);
     try {
-      const response = await axios.post(apiUrl, contact);
+      const response = await axios.post(`${apiUrlContacts}/contacts`);
       return response.data;
     } catch (error) {
       throw error;
@@ -49,12 +43,9 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, { getState, rejectWithValue }) => {
     const { auth } = getState();
-    if (!auth.token) {
-      throw new Error('No token available');
-    }
     setAuthHeader(auth.token);
     try {
-      await axios.delete(`${apiUrl}/${contactId}`);
+      await axios.delete(`${apiUrlContacts}/${contactId}`);
       return contactId;
     } catch (error) {
       throw error;

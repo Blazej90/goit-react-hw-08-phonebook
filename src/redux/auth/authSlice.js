@@ -19,7 +19,7 @@ export const loginUser = createAsyncThunk(
       const token = response.data.token;
       localStorage.setItem('token', token);
       setAuthToken(token);
-      return response.data.user; // Zwracamy użytkownika
+      return response.data.user;
     } catch (error) {
       throw error;
     }
@@ -44,10 +44,7 @@ export const registerUser = createAsyncThunk(
 export const refreshToken = createAsyncThunk(
   'auth/refreshToken',
   async (_, { dispatch, getState, rejectWithValue }) => {
-    const token = getState().auth.token;
-    if (!token) {
-      throw new Error('No token available');
-    }
+    // const token = getState().auth.token;
     try {
       const response = await axios.get(`${apiUrl}/current`);
       return response.data.user;

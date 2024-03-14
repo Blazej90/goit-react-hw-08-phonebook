@@ -77,7 +77,6 @@ const App = () => {
           path="/login"
           element={<RestrictedRoute component={<Login />} redirectTo="/" />}
         />
-        {/* Warunkowe wyrenderowanie komponentu Phonebook na podstawie stanu isLoggedIn */}
         {isLoggedIn && (
           <Route
             path="/phonebook"
