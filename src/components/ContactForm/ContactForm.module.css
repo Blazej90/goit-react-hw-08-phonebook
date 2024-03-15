@@ -1,5 +1,4 @@
 .appContainer {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,4 +22,41 @@
   margin-top: 15px;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.appContainer {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.appContainer h1 {
+  margin-bottom: 10px;
+}
+
+.appContainer p.name {
+  margin-bottom: 5px;
+}
+
+.appContainer input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  margin-bottom: 10px;
+}
+
+.appContainer button.addContactBtn {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.appContainer button.addContactBtn:hover {
+  background-color: #0056b3;
 }

@@ -1,0 +1,26 @@
+.containerProfile {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.containerProfile p {
+  margin-bottom: 10px;
+}
+
+.containerProfile button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.containerProfile button:hover {
+  background-color: #0056b3;
+}

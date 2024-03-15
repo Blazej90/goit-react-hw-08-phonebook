@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../redux/auth/authSlice';
-import { useAuth } from '../hooks';
+import { logoutUser } from '../../redux/auth/authSlice';
+import { useAuth } from '../../hooks';
+import styles from './UserMenu.module.css';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const UserMenu = () => {
   };
 
   return (
-    <div>
+    <div className={styles.containerProfile}>
       {isLoading ? (
         <p>Loading user...</p>
       ) : user ? (

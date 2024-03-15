@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks';
-import UserMenu from '../UserMenu';
+import UserMenu from '../UserMenu/UserMenu';
 
 import styles from './Layout.module.css';
 

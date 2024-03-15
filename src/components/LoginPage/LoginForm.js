@@ -44,30 +44,35 @@ const LoginForm = ({ onLoginSuccess }) => {
   }
 
   return (
-    <div className={styles.containerLogin}>
-      <Helmet>
-        <title>Login</title>
-      </Helmet>
-      <div>
-        <h2>Log in</h2>
+    <div className={styles.containerCentered}>
+      <div className={styles.containerLogin}>
+        {' '}
+        {/* Zastosowanie klasy CSS dla formularza logowania */}
+        <Helmet>
+          <title>Login</title>
+        </Helmet>
+        <div>
+          <h2>Log in</h2>
+        </div>
+        <form onSubmit={handleSubmit} className={styles.containerLoginInputs}>
+          {' '}
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Password"
+          />
+          <button type="submit">Login</button>
+        </form>
       </div>
-      <form onSubmit={handleSubmit} className={styles.containerLoginInputs}>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder="Password"
-        />
-        <button type="submit">Login</button>
-      </form>
     </div>
   );
 };

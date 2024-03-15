@@ -46,46 +46,52 @@ const RegisterForm = () => {
 
   return (
     <div className={styles.containerRegister}>
-      <Helmet>
-        <title>Register</title>
-      </Helmet>
-      <div>
-        <h2>Create your account</h2>
-      </div>
-      {registrationSuccess ? (
+      <div className={styles.containerRegister}>
+        <Helmet>
+          <title>Register</title>
+        </Helmet>
         <div>
-          <p>
-            Great! You have just created your account. Log in with the correct
-            information.
-          </p>
-          <button onClick={redirectToLogin}>Go to Login</button>{' '}
+          <h2>Create your account</h2>
         </div>
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className={styles.containerRegisterInputs}
-        >
-          <input
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-            placeholder="Name"
-          />
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-          <button type="submit">Register</button>
-        </form>
-      )}
+        {registrationSuccess ? (
+          <div>
+            <p>
+              Great! You have just created your account. Log in with the correct
+              information.
+            </p>
+            <div className={styles.containerBtnGoToLogin}>
+              <button className={styles.btnGoToLogin} onClick={redirectToLogin}>
+                Go to Login
+              </button>{' '}
+            </div>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className={styles.containerRegisterInputs}
+          >
+            <input
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+              placeholder="Name"
+            />
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+            <button type="submit">Register</button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };
