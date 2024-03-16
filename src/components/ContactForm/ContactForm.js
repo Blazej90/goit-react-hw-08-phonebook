@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { addNewContact } from '../../redux/contactsSlice';
 import styles from './ContactForm.module.css';
@@ -8,6 +8,7 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -18,6 +19,12 @@ const ContactForm = () => {
   };
 
   const handleAddContact = () => {
+    const isContactExists = contacts.some(contact => contact.name === name);
+    if (isContactExists) {
+      alert('Kontakt o tej nazwie już istnieje!');
+      return;
+    }
+
     dispatch(addNewContact({ id: nanoid(), name, number }));
     setName('');
     setNumber('');

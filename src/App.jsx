@@ -5,7 +5,6 @@ import Layout from './components/LayoutPage/Layout';
 import PrivateRoute from './components/PrivateRoute';
 import RestrictedRoute from './components/RestrictedRoute';
 import { refreshToken } from './redux/auth/authSlice';
-// import { useAuth } from './hooks';
 import Home from './pages/HomePage/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
