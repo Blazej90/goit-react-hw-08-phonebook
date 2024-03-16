@@ -44,10 +44,15 @@ export const registerUser = createAsyncThunk(
 export const refreshToken = createAsyncThunk(
   'auth/refreshToken',
   async (_, { dispatch, getState, rejectWithValue }) => {
-    // const token = getState().auth.token;
+    const token = getState().auth.token;
+    if (!token) {
+      return rejectWithValue('Token not found');
+    }
+
     try {
+      setAuthToken(token);
       const response = await axios.get(`${apiUrl}/current`);
-      return response.data.user;
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -110,6 +115,10 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
+        // state.loading = false;
+        // state.user = action.payload;
+        state.isLoggedIn = true;
+        state.error = null;
         state.loading = false;
         state.user = action.payload;
       })

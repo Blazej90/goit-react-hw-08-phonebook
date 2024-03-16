@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const apiUrlContacts = 'https://connections-api.herokuapp.com';
+const apiUrlContacts = 'https://connections-api.herokuapp.com/contacts';
 
 const setAuthHeader = token => {
   if (token) {
