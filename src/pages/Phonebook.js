@@ -8,7 +8,7 @@ import {
 } from '../redux/contactsSlice';
 import { selectLoading, selectError } from '../redux/auth/selectors';
 import ContactForm from '../components/ContactForm/ContactForm';
-import ContactList from '../components/ContactList';
+import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
 
 const Phonebook = () => {

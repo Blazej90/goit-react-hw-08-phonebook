@@ -47,7 +47,6 @@ const LoginForm = ({ onLoginSuccess }) => {
     <div className={styles.containerCentered}>
       <div className={styles.containerLogin}>
         {' '}
-        {/* Zastosowanie klasy CSS dla formularza logowania */}
         <Helmet>
           <title>Login</title>
         </Helmet>

@@ -24,3 +24,8 @@
 .containerProfile button:hover {
   background-color: #0056b3;
 }
+
+.containerLogout {
+  display: flex;
+  justify-content: center;
+}

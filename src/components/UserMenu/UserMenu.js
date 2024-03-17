@@ -19,7 +19,9 @@ const UserMenu = () => {
       ) : user ? (
         <>
           <p>{user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
+          <div className={styles.containerLogout}>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
         </>
       ) : (
         <p>User not logged in</p>
