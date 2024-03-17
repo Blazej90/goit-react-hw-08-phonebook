@@ -3,28 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.pageTitle {
-  margin: 0;
-  padding-top: 30px;
-  padding-bottom: 80px;
-}
-
-.name {
-  margin: 0;
-  font-weight: 500;
-  padding-top: 15px;
-  padding-bottom: 5px;
-}
-
-.addContactBtn {
-  margin-top: 15px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.appContainer {
   background-color: #f8f9fa;
   padding: 20px;
   border-radius: 10px;
@@ -33,11 +11,19 @@
 }
 
 .appContainer h1 {
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: #007bff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 .appContainer p.name {
-  margin-bottom: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  padding-top: 15px;
 }
 
 .appContainer input {

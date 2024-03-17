@@ -7,9 +7,8 @@ const Home = () => {
   const { user, isLoggedIn } = useAuth();
 
   return (
-    <div className={styles.conainerHome}>
+    <div className={styles.containerHome}>
       <h1>Welcome to the application Phonebook</h1>
-      <p>This is Home page</p>
       {isLoggedIn && <p>Welcome back, {user.name}!</p>}
     </div>
   );

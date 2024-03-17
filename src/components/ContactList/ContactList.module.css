@@ -1,19 +1,14 @@
-.contactItem {
-  margin-bottom: 10px;
-}
-
-.deleteBtn {
-  margin-left: 20px;
-  border-radius: 5px;
+.containerContactList {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .contactList {
   list-style: none;
   padding: 0;
-}
-
-.containerContactList > li {
-  justify-content: center;
 }
 
 .contactItem {
@@ -31,7 +26,6 @@
 }
 
 .contactItem button {
-  margin-left: 90px;
   padding: 5px 10px;
   background-color: #dc3545;
   color: #fff;
@@ -43,8 +37,4 @@
 
 .contactItem button:hover {
   background-color: #c82333;
-}
-
-li {
-  justify-content: center;
 }
