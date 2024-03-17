@@ -9,6 +9,7 @@ import styles from './LoginForm.module.css';
 const LoginForm = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const { isLoggedIn } = useAuth();
 
@@ -18,6 +19,10 @@ const LoginForm = ({ onLoginSuccess }) => {
 
   const handlePasswordChange = event => {
     setPassword(event.target.value);
+  };
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async event => {
@@ -62,13 +67,22 @@ const LoginForm = ({ onLoginSuccess }) => {
             onChange={handleEmailChange}
             placeholder="Email"
           />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
+          <div className={styles.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+            <button
+              type="button"
+              onClick={handleTogglePasswordVisibility}
+              className={styles.togglePasswordBtn}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
           <button type="submit">Login</button>
         </form>
       </div>

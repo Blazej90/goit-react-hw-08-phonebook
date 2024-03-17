@@ -10,6 +10,7 @@ const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +25,10 @@ const RegisterForm = () => {
 
   const handlePasswordChange = event => {
     setPassword(event.target.value);
+  };
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async event => {
@@ -46,52 +51,59 @@ const RegisterForm = () => {
 
   return (
     <div className={styles.containerRegister}>
-      <div className={styles.containerRegister}>
-        <Helmet>
-          <title>Register</title>
-        </Helmet>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
+      <div>
+        <h2>Create your account</h2>
+      </div>
+      {registrationSuccess ? (
         <div>
-          <h2>Create your account</h2>
-        </div>
-        {registrationSuccess ? (
-          <div>
-            <p>
-              Great! You have just created your account. Log in with the correct
-              information.
-            </p>
-            <div className={styles.containerBtnGoToLogin}>
-              <button className={styles.btnGoToLogin} onClick={redirectToLogin}>
-                Go to Login
-              </button>{' '}
-            </div>
+          <p>
+            Great! You have just created your account. Log in with the correct
+            information.
+          </p>
+          <div className={styles.containerBtnGoToLogin}>
+            <button className={styles.btnGoToLogin} onClick={redirectToLogin}>
+              Go to Login
+            </button>
           </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className={styles.containerRegisterInputs}
-          >
+        </div>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className={styles.containerRegisterInputs}
+        >
+          <input
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+            placeholder="Name"
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Email"
+          />
+          <div className={styles.passwordContainer}>
             <input
-              type="text"
-              value={name}
-              onChange={handleNameChange}
-              placeholder="Name"
-            />
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Email"
-            />
-            <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={handlePasswordChange}
               placeholder="Password"
             />
-            <button type="submit">Register</button>
-          </form>
-        )}
-      </div>
+            <button
+              type="button"
+              onClick={handleTogglePasswordVisibility}
+              className={styles.togglePasswordBtn}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+          <button type="submit">Register</button>
+        </form>
+      )}
     </div>
   );
 };
