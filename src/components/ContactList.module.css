@@ -1,0 +1,50 @@
+.contactItem {
+  margin-bottom: 10px;
+}
+
+.deleteBtn {
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+.contactList {
+  list-style: none;
+  padding: 0;
+}
+
+.containerContactList > li {
+  justify-content: center;
+}
+
+.contactItem {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.containerDeleteBtn {
+  margin-left: auto;
+}
+
+.contactItem button {
+  margin-left: 90px;
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contactItem button:hover {
+  background-color: #c82333;
+}
+
+li {
+  justify-content: center;
+}

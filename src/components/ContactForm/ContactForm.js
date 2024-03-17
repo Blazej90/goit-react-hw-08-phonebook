@@ -21,7 +21,7 @@ const ContactForm = () => {
   const handleAddContact = () => {
     const isContactExists = contacts.some(contact => contact.name === name);
     if (isContactExists) {
-      alert('Kontakt o tej nazwie już istnieje!');
+      alert('Sorry... but a contact with this name already exists!');
       return;
     }
 
